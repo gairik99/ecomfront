@@ -6,6 +6,8 @@ import { getStoreProducts } from "../services/action";
 import { useCart } from "../context/cartContext";
 const StorePage = () => {
     const [product, setProduct] = useState([]);
+    const [filteredProduct, setFilteredProduct] = useState([]);
+    const [search, setSearch] = useState('');
     const { storeId } = useParams();
     const navigate = useNavigate();
     const { cart, setCart } = useCart();
@@ -15,6 +17,7 @@ const StorePage = () => {
                 const data = await getStoreProducts(storeId);
                 // console.log(data)
                 setProduct(data.products);
+                setFilteredProduct(data.products);
             } catch (error) {
                 console.error("Error fetching data:", error);
             }
@@ -40,22 +43,40 @@ const StorePage = () => {
             };
         });
     };
-    // console.log('product', product)
+
+    useEffect(() => {
+        const lowerSearch = search.toLowerCase();
+        if (lowerSearch.trim() === "") {
+            setFilteredProduct(product);
+        } else {
+            const filtered = product.filter((p) =>
+                p.name.toLowerCase().includes(lowerSearch)
+            );
+            setFilteredProduct(filtered);
+        }
+    }, [search, product]);
+    console.log('product', product)
     // console.log('cart', cart)
     return (
         <div style={{ padding: "20px" }}>
             <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <h2>
+                <h4>
                     {" "}
                     {product[0]?.storeName}
                     {"  -  "}Products{" "}
-                </h2>
-                <button
-                    style={{ width: "80px", height: "24px" }}
-                    onClick={() => navigate("/cart")}
-                >
-                    View Cart
-                </button>
+                </h4>
+                <div style={{ display: 'flex', gap: '5px' }}>
+                    <button
+                        style={{ width: "80px", height: "24px" }}
+                        onClick={() => navigate("/cart")}
+                    >
+                        View Cart
+                    </button>
+                    <div style={{ display: 'flex', gap: '5px' }}>
+                        <input placeholder="search product" style={{ height: '24px' }} value={search} onChange={(e) => setSearch(e.target.value)} />
+                    </div>
+                </div>
+
             </div>
             <div
                 style={{
@@ -66,7 +87,7 @@ const StorePage = () => {
                     justifyContent: "center",
                 }}
             >
-                {product.map(({ _id, name, price }) => {
+                {filteredProduct.map(({ _id, name, price }) => {
                     return (
                         <ProductCard
                             id={_id}
