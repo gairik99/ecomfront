@@ -3,7 +3,7 @@ import React from 'react'
 const ProductCard = ({ id, price, name, ...props }) => {
     return (
         <div style={{
-            width: '400px',
+            width: '360px',
             height: '200px',
             padding: '20px',
             borderRadius: '10px',
@@ -15,6 +15,7 @@ const ProductCard = ({ id, price, name, ...props }) => {
             alignItems: 'center',
             gap: '10px',
             background: '#bde0fe',
+            margin: '20px'
         }}
         >
             <h4 style={{ marginBottom: '10px' }}>{name}</h4>

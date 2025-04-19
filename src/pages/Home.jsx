@@ -26,9 +26,10 @@ const Home = () => {
                 style={{
                     display: "grid",
                     gridTemplateColumns: "repeat(auto-fit, minmax(400px, 1fr))",
-                    gap: "5px",
-                    padding: "20px",
+                    gap: "20px",
+                    padding: "10px",
                     justifyContent: "center",
+
                 }}
             >
                 {store.map(({ _id, name, location }) => {

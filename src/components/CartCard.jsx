@@ -3,7 +3,7 @@ import React from 'react'
 const CartCard = ({ price, name, qty, onClick }) => {
     return (
         <div style={{
-            width: '400px',
+            width: '360px',
             height: '200px',
             padding: '20px',
             borderRadius: '10px',
@@ -15,6 +15,7 @@ const CartCard = ({ price, name, qty, onClick }) => {
             alignItems: 'center',
             gap: '10px',
             background: '#bde0fe',
+            margin: '20px'
         }}
         >
             <h4 style={{ marginBottom: '10px', padding: '5px' }}>{name}</h4>

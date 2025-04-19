@@ -6,7 +6,7 @@ const Card = ({ id, name, location }) => {
     // console.log('card', id)
     return (
         <div style={{
-            width: '400px',
+            width: '360px',
             height: '200px',
             padding: '20px',
             borderRadius: '10px',
@@ -15,7 +15,8 @@ const Card = ({ id, name, location }) => {
             display: 'flex',
             flexDirection: 'column',
             gap: '10px',
-            background: '#bde0fe'
+            background: '#bde0fe',
+            margin: '20px'
         }}
             key={id}
             onClick={() => navigate(`/store/${id}`)}>
